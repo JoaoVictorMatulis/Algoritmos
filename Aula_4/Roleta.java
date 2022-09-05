@@ -90,11 +90,25 @@ public class Roleta {
             }
             escolha = 2;
         }
+        verificar(numerosEscolhidos, quantidadeDinheiroAposta);
+    }
+
+    public static void verificar(int[] numerosEscolhidos, double[] quantidadeDinheiroAposta) {
+        int aleatorio = numeroAleatorio();
+        for (int i = 0; i < numerosEscolhidos.length; i++) {
+            if (numerosEscolhidos[i] == aleatorio) {
+                quantidadeDinheiroAposta[i] = quantidadeDinheiroAposta[i] * 2;
+                System.out.printf("\nNúmero ganhador: %d \nVocê ganhou: %.2f\n", numerosEscolhidos[i],
+                        quantidadeDinheiroAposta[i]);
+                saldo += quantidadeDinheiroAposta[i];
+            }
+        }
+        System.out.println("Saldo atual: " + saldo);
     }
 
     public static int numeroAleatorio() {
         Random gerador = new Random();
-        int aleatorio = gerador.nextInt(37);
+        int aleatorio = gerador.nextInt(2);
         return aleatorio;
     }
 
