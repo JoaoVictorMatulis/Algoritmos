@@ -22,7 +22,7 @@ public class Roleta {
         System.out.println("\nEm quantos números você quer aposta?");
         int numeroApostas = leitor.nextInt();
         int[] numerosEscolhidos = new int[numeroApostas];
-        int[] quantidadeDinheiroAposta = new int[numeroApostas];
+        double[] quantidadeDinheiroAposta = new double[numeroApostas];
         int contador = 0;
         int escolha = 2;
         for (int i = 0; i < numerosEscolhidos.length; i++) {
@@ -83,11 +83,12 @@ public class Roleta {
                 System.out.printf(
                         "Valor do número %d: %.2f\nDigite o que você quer fazer?\n(some o quanto dinheiro você quer ou subtraia)",
                         numerosEscolhidos[local], quantidadeDinheiroAposta[local]);
-                int trocaValor = 0;
+                double trocaValor = leitor.nextDouble();
                 saldo += quantidadeDinheiroAposta[local];
                 quantidadeDinheiroAposta[local] = quantidadeDinheiroAposta[local] + trocaValor;
                 saldo -= quantidadeDinheiroAposta[local];
             }
+            escolha = 2;
         }
     }
 
