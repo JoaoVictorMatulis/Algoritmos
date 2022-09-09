@@ -31,3 +31,26 @@ public class ex6 {
                 menor);
     }
 }
+
+/*
+ * public class Exercicio6 {
+ * public static void main(String[] args) {
+ * int qtd = Integer.parseInt(JOptionPane.showInputDialog
+ * ("Digite o tamanho do vetor:"));
+ * int vetor[] = new int[qtd];
+ * int multiplos5=0, total=0, menor=Integer.MAX_VALUE;
+ * for(int i=0 ; i<vetor.length ; i++) {
+ * vetor[i] = (int)(Math.random()*(40-20)+20);
+ * if(vetor[i]<menor) {
+ * menor = vetor[i]; }
+ * if(vetor[i]%5==0)
+ * multiplos5++;
+ * total+=vetor[i]; }
+ * System.out.println("Vetor de números = ");
+ * for(int n : vetor)
+ * System.out.print(n + " ");
+ * System.out.println("\nMédia = " + (total/vetor.length));
+ * System.out.println("\nTotal de múltiplos de 5 = " + multiplos5);
+ * System.out.println("Menor valor no vetor = " + menor);
+ * } }
+ */
