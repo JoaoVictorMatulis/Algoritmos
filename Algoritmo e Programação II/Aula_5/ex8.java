@@ -29,3 +29,27 @@ public class ex8 {
         }
     }
 }
+
+/*
+public class Exercicio8NotasAlunos {
+	public static void main(String[] args) {
+	int qtd = Integer.parseInt(JOptionPane.showInputDialog("Digite a quantidade:"));
+	String nomes[] = new String[qtd];
+	float notas1[], notas2[];
+	notas1 = new float[qtd];
+	notas2 = new float[qtd];
+	for(int i=0 ; i<qtd; i++)		{
+	nomes[i] = JOptionPane.showInputDialog("Digite um nome:");
+	notas1[i] = Float.parseFloat(JOptionPane.showInputDialog("Digite a 1ª nota:"));
+	notas2[i] = Float.parseFloat(JOptionPane.showInputDialog("Digite a 2ª nota:"));		}
+	for(int i=0 ; i<qtd ; i++)		{
+	   float media = (notas1[i]+notas2[i])/2;
+	   if(media>5)
+		System.out.println("O aluno(a) " + nomes[i] + " foi aprovado(a) com a média:  " +   media); 
+	else
+	System.out.println("O aluno(a) " + nomes[i] + " foi reprovado(a) com a média:  "  + media); 
+       }
+    }
+}
+  
+*/
