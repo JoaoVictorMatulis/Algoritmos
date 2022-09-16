@@ -93,13 +93,6 @@ public class Roleta {
         }
     }
 
-    public static void parar() {
-        int n = 1;
-        while (n == 1) {
-
-        }
-    }
-
     public static int numeroAleatorio() {
         Random gerador = new Random();
         int aleatorio = gerador.nextInt(37);
