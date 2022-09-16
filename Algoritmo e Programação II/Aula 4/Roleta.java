@@ -8,6 +8,10 @@ public class Roleta {
 
     public static void main(String[] args) {
         System.out.println("================== Bem vindo a Roleto do Jão ==================");
+        menu();
+    }
+
+    public static void menu() {
         System.out.println("Escolha o modo de jogo:\n(1) Roleta");
         int modoJogo = leitor.nextInt();
         switch (modoJogo) {
@@ -15,7 +19,6 @@ public class Roleta {
                 escolhaNumeroAposta();
                 break;
         }
-
     }
 
     public static void escolhaNumeroAposta() {
@@ -82,14 +85,28 @@ public class Roleta {
         if (saldo <= 0) {
             System.out.println("Saldo zerado\nVocê não pode mais jogar");
             System.exit(0);
+        } else {
+            escolhaFinal();
         }
-        System.out.printf("Saldo Atual:R$ %.2f\nEscolha umas das opções:\n(0)Encerrar o Programa\n(1)Voltar ao menu(Não reinicia seu saldo)\n(2)Jogar de novo no mesmo modo",saldo);
+    }
+
+    public static void escolhaFinal() {
+        System.out.printf(
+                "\nSaldo Atual:R$ %.2f\nEscolha umas das opções:\n(0)Encerrar o Programa\n(1)Voltar ao menu(Não reinicia seu saldo)\n(2)Jogar de novo no mesmo modo\n",
+                saldo);
         int escolha = leitor.nextInt();
-        switch(escolha){
+        switch (escolha) {
             case 0:
+                System.out.println(
+                        "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                 System.exit(0);
                 break;
             case 1:
+                menu();
+                break;
+            case 2:
+                escolhaNumeroAposta();
+                break;
         }
     }
 
