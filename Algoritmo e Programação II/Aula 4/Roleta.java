@@ -19,96 +19,90 @@ public class Roleta {
     }
 
     public static void escolhaNumeroAposta() {
-        System.out.println("\nEm quantos números você quer aposta?");
-        int numeroApostas = leitor.nextInt();
-        int[] numerosEscolhidos = new int[numeroApostas];
-        double[] quantidadeDinheiroAposta = new double[numeroApostas];
+        System.out.println("\nEm quantos Números quer apostar?");
+        int tamanho = leitor.nextInt();
+        int[] numerosAposta = new int[tamanho];
+        double[] apostaDinheiro = new double[tamanho];
         int contador = 0;
-        int escolha = 2;
-        for (int i = 0; i < numerosEscolhidos.length; i++) {
-            System.out.println("\nEscolha um número de 1 a 36 para sua aposta!");
-            numerosEscolhidos[i] = leitor.nextInt();
-            if (numerosEscolhidos[i] <= 0 || numerosEscolhidos[i] > 36) {
+        for (int i = 0; i < tamanho; i++) {
+            System.out.print("\nPor favor escolha um número de 1 a 36 para apostar: ");
+            int numEscolha = leitor.nextInt();
+            if (numEscolha < 1 || numEscolha > 36) {
                 do {
-                    System.out.println("\nNúmero escolhido inválido!\n por favor escolha um número de 1 a 36.\n");
-                    numerosEscolhidos[i] = leitor.nextInt();
-                } while (numerosEscolhidos[i] <= 0 || numerosEscolhidos[i] > 36);
+                    System.out.println(
+                            "\nNúmero escolhido inválido\nPor favor escolha um número de 1 a 36 para apostar: ");
+                    numEscolha = leitor.nextInt();
+                } while (numEscolha < 1 || numEscolha > 36);
             }
-            int verificador = numerosEscolhidos[i];
-            int local = 0;
             if (contador > 0) {
-                for (int l = 0; l < numerosEscolhidos.length; l++) {
-                    if (i != l) {
-                        if (numerosEscolhidos[l] == verificador) {
-                            System.out.println("\nNúmeros escolhidos:");
-                            for (int v : numerosEscolhidos) {
-                                System.out.print(v + ", ");
-                            }
-                            System.out.printf(
-                                    "\nEsse número já foi escolhido!\nPor favor escolha uma das seguintes opções\n(1)Trocar valor de aposta do número %d\n(2)Escolher outro número.\n",
-                                    numerosEscolhidos[l]);
-                            escolha = leitor.nextInt();
-                            if (escolha > 2 || escolha < 1) {
-                                do {
-                                    System.out.printf(
-                                            "\nEscolha inválida!\nPor favor escolha uma das seguintes opções\n(1)Trocar valor de aposta do número %d\n(2)Escolher outro número.\n",
-                                            numerosEscolhidos[l]);
-                                    escolha = leitor.nextInt();
-                                    local = l;
-                                } while (escolha > 2 || escolha < 1);
-                            }
-                            if (escolha == 2) {
-                                System.out.println("\nEscolha um número de 1 a 36 para sua aposta!");
-                                numerosEscolhidos[i] = leitor.nextInt();
-                                if (numerosEscolhidos[i] <= 0 || numerosEscolhidos[i] > 36) {
-                                    do {
-                                        System.out.println(
-                                                "\nNúmero escolhido inválido!\n por favor escolha um número de 1 a 36.\n");
-                                        numerosEscolhidos[i] = leitor.nextInt();
-                                    } while (numerosEscolhidos[i] <= 0 || numerosEscolhidos[i] > 36);
-                                }
-                            }
-                        }
+                for (int v = 0; v < numerosAposta.length; v++) {
+                    if (numEscolha == numerosAposta[v]) {
+                        do {
+                            System.out.println("Número já escolhido\nPorfavor escolha outro númeor");
+                            numEscolha = leitor.nextInt();
+                        } while (numEscolha == numerosAposta[v]);
+
                     }
                 }
             }
-            verificador = -1;
-            contador++;
-            if (escolha == 2) {
-                System.out.println("\nSaldo Atual:" + saldo + "\nQuanto você quer apostar no numero "
-                        + numerosEscolhidos[i] + "?");
-                quantidadeDinheiroAposta[i] = leitor.nextInt();
-                saldo -= quantidadeDinheiroAposta[i];
-            } else {
-                System.out.printf(
-                        "Valor do número %d: %.2f\nDigite o que você quer fazer?\n(some o quanto dinheiro você quer ou subtraia)",
-                        numerosEscolhidos[local], quantidadeDinheiroAposta[local]);
-                double trocaValor = leitor.nextDouble();
-                saldo += quantidadeDinheiroAposta[local];
-                quantidadeDinheiroAposta[local] = quantidadeDinheiroAposta[local] + trocaValor;
-                saldo -= quantidadeDinheiroAposta[local];
+            numerosAposta[i] = numEscolha;
+            System.out.printf("Quanto você quer apostar no número %d?\nSaldo: R$ %.2f\n", numerosAposta[i], saldo);
+            double valorAposta = leitor.nextDouble();
+            if (valorAposta > saldo || valorAposta < 1) {
+                do {
+                    System.out.printf(
+                            "\nValor de aposta inválido\nPorfavor Escolha quanto você quer aposta no número %d dentro do saldo disponível\nSaldo:R$ %.2f\n",
+                            numerosAposta[i], saldo);
+                    valorAposta = leitor.nextDouble();
+                } while (valorAposta > saldo || valorAposta < 1);
             }
-            escolha = 2;
+            apostaDinheiro[i] = valorAposta;
+            saldo = saldo - valorAposta;
+            contador++;
         }
-        verificar(numerosEscolhidos, quantidadeDinheiroAposta);
+        int numAleatorio = numeroAleatorio();
+        System.out.printf("\nNúmero roletado: %d\n", numAleatorio);
+        verificador(numerosAposta, apostaDinheiro, numAleatorio);
     }
 
-    public static void verificar(int[] numerosEscolhidos, double[] quantidadeDinheiroAposta) {
-        int aleatorio = numeroAleatorio();
-        for (int i = 0; i < numerosEscolhidos.length; i++) {
-            if (numerosEscolhidos[i] == aleatorio) {
-                quantidadeDinheiroAposta[i] = quantidadeDinheiroAposta[i] * 2;
-                System.out.printf("\nNúmero ganhador: %d \nVocê ganhou: %.2f\n", numerosEscolhidos[i],
-                        quantidadeDinheiroAposta[i]);
-                saldo += quantidadeDinheiroAposta[i];
+    public static void verificador(int[] numerosAposta, double[] apostaDinheiro, int numAleatorio) {
+        int verificador = 0;
+        for (int i = 0; i < numerosAposta.length; i++) {
+            if (numerosAposta[i] == numAleatorio) {
+                apostaDinheiro[i] = apostaDinheiro[i] * 2;
+                saldo += apostaDinheiro[i];
+                System.out.printf("Parabéns\nVocê acertou o número sortiado\nGanhou:R$ %.2f\nSaldo Atual: R$ %.2f",
+                        apostaDinheiro[i], saldo);
+                verificador = 1;
             }
         }
-        System.out.println("Saldo atual: " + saldo);
+        if (verificador < 1) {
+            System.out.println("Que pena, você não consegui acertar o número");
+        }
+        if (saldo <= 0) {
+            System.out.println("Saldo zerado\nVocê não pode mais jogar");
+            System.exit(0);
+        }
+        System.out.printf("Saldo Atual:R$ %.2f\nEscolha umas das opções:\n(0)Encerrar o Programa\n(1)Voltar ao menu(Não reinicia seu saldo)\n(2)Jogar de novo no mesmo modo",saldo);
+        int escolha = leitor.nextInt();
+        switch(escolha){
+            case 0:
+                System.exit(0);
+                break;
+            case 1:
+        }
+    }
+
+    public static void parar() {
+        int n = 1;
+        while (n == 1) {
+
+        }
     }
 
     public static int numeroAleatorio() {
         Random gerador = new Random();
-        int aleatorio = gerador.nextInt(2);
+        int aleatorio = gerador.nextInt(37);
         return aleatorio;
     }
 
